@@ -22,6 +22,8 @@ header {
 .translate-input {
     width: 35vw;
     height: 25vh;
+    /* border-radius: 25px; */
+    padding: 1vw;
     /* display: flex; */
     /* border: 1px solid brown; */
    
@@ -38,6 +40,14 @@ header {
     border: 1px solid green;
     width: 35vw;
     height: 25vh;
+    /* border-radius: 25px; */
+    overflow: scroll;
+    padding: 1vw;
+
+
+    /* hides the horizontal scroll bar */
+    overflow-x: hidden;  
+    
 }
 
 .header-img {
