@@ -56,7 +56,7 @@ let detect = () => {
     fetch("https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1."+k1+"."+k2+"."+k3+"&text="+text+"&[hint=english,spanish,german]")
     .then(result => result.json())
     .then(testResult => {
-       console.log(testResult)
+    //    console.log(testResult)
        document.querySelector("#language-input").value = testResult.lang
     })     
 }
