@@ -1,6 +1,22 @@
+/* TODO: 
+ -Add keyup event for the enter key
+ -Refactor to reduce code smell
+ -Break up into ES6 Modules
+ -Comment code
+ -Retest to make sure API Key still works
+*/
+
+const k1 = "20200424T141333Z"
+const k2 = "1b8786ba0d533aeb"
+const k3 = "e4278cb06f8fa7211135a90d661bd62aa32960fd"
+
 //Click event to trigger the translation
 document.querySelector("#translate-btn").addEventListener("click", translate)
 
+function fetchFromAPI(text, lang) {
+    return fetch("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1."+k1+"."+k2+"."+k3+"&text="+text+"&lang="+lang)
+        .then(result => result.json())
+}
 
 //Function to translate text using Yandex Translate
 function translate(){
@@ -12,14 +28,12 @@ function translate(){
     if(outputLang === "hill"){
         outputLang = "en"
         lang = inputLang + '-' + outputLang;
-        fetch("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200424T141333Z.1b8786ba0d533aeb.e4278cb06f8fa7211135a90d661bd62aa32960fd&text="+text+"&lang="+lang)
-        .then(result => result.json())
+        fetchFromAPI(text, lang)
         .then(translatedString =>{         
         document.querySelector("#output-div").innerHTML = hillbillian(translatedString.text[0])    
         })
     } else {
-        fetch("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200424T141333Z.1b8786ba0d533aeb.e4278cb06f8fa7211135a90d661bd62aa32960fd&text="+text+"&lang="+lang)
-        .then(result => result.json())
+        fetchFromAPI(text, lang)
         .then(translatedString =>{         
         document.querySelector("#output-div").innerHTML = translatedString.text[0]    
         })
@@ -39,7 +53,7 @@ let detect = () => {
     // let hint = ["english", "german", "spanish"]
     let text = document.querySelector("#translate-input").value
     let hint = ""
-    fetch("https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1.20200424T141333Z.1b8786ba0d533aeb.e4278cb06f8fa7211135a90d661bd62aa32960fd&text="+text+"&[hint=english,spanish,german]")
+    fetch("https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1."+k1+"."+k2+"."+k3+"&text="+text+"&[hint=english,spanish,german]")
     .then(result => result.json())
     .then(testResult => {
        console.log(testResult)
